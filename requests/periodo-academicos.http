@@ -1,0 +1,63 @@
+### 1. POST exitoso - 201 Created
+POST http://localhost:8080/api/periodos-academicos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "codigo": "2026-2",
+  "fechaInicio": "2026-08-17",
+  "fechaFin": "2026-12-05",
+  "estado": "ACTIVO",
+  "versionActivaId": 1
+}
+
+### 2. GET todos - 200 OK
+GET http://localhost:8080/api/periodos-academicos
+
+### 3. GET por ID - 200 OK
+GET http://localhost:8080/api/periodos-academicos/1
+
+### 4. PUT exitoso - 200 OK
+PUT http://localhost:8080/api/periodos-academicos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "codigo": "2026-2",
+  "fechaInicio": "2026-08-17",
+  "fechaFin": "2026-12-10",
+  "estado": "FINALIZADO",
+  "versionActivaId": 2
+}
+
+### 5. POST inválido - 400 Bad Request
+POST http://localhost:8080/api/periodos-academicos
+Content-Type: application/json
+
+{
+  "id": -1,
+  "codigo": "",
+  "fechaInicio": null,
+  "fechaFin": null,
+  "estado": "",
+  "versionActivaId": 0
+}
+
+### 6. PUT inválido - 400 Bad Request
+PUT http://localhost:8080/api/periodos-academicos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "codigo": "",
+  "fechaInicio": null,
+  "fechaFin": null,
+  "estado": "",
+  "versionActivaId": -2
+}
+
+### 7. GET ID inexistente - 404 Not Found
+GET http://localhost:8080/api/periodos-academicos/999
+
+### 8. DELETE exitoso - 200 OK
+DELETE http://localhost:8080/api/periodos-academicos/1
