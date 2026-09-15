@@ -1,0 +1,63 @@
+### 1. POST exitoso - 201 Created
+POST http://localhost:8080/api/estudiantes
+Content-Type: application/json
+
+{
+  "cif": "2026-0001",
+  "nombre": "Ana Martinez",
+  "periodoAdmisionId": 1,
+  "estadoEvaluacion": "PENDIENTE",
+  "email": "ana.martinez@correo.com",
+  "fechaNacimiento": "2005-04-18"
+}
+
+### 2. GET todos - 200 OK
+GET http://localhost:8080/api/estudiantes
+
+### 3. GET por CIF - 200 OK
+GET http://localhost:8080/api/estudiantes/2026-0001
+
+### 4. PUT exitoso - 200 OK
+PUT http://localhost:8080/api/estudiantes/2026-0001
+Content-Type: application/json
+
+{
+  "cif": "2026-0001",
+  "nombre": "Ana Sofia Martinez",
+  "periodoAdmisionId": 2,
+  "estadoEvaluacion": "APROBADO",
+  "email": "ana.sofia@correo.com",
+  "fechaNacimiento": "2005-04-18"
+}
+
+### 5. POST inválido - 400 Bad Request
+POST http://localhost:8080/api/estudiantes
+Content-Type: application/json
+
+{
+  "cif": "",
+  "nombre": "",
+  "periodoAdmisionId": 0,
+  "estadoEvaluacion": "DESCONOCIDO",
+  "email": "correo-invalido",
+  "fechaNacimiento": "2035-01-01"
+}
+
+### 6. PUT inválido - 400 Bad Request
+PUT http://localhost:8080/api/estudiantes/2026-0001
+Content-Type: application/json
+
+{
+  "cif": "2026-0001",
+  "nombre": "A",
+  "periodoAdmisionId": 0,
+  "estadoEvaluacion": "",
+  "email": "no-es-email",
+  "fechaNacimiento": "2030-12-31"
+}
+
+### 7. GET con identificador inexistente - 404 Not Found
+GET http://localhost:8080/api/estudiantes/NO-EXISTE
+
+### 8. DELETE exitoso - 200 OK
+DELETE http://localhost:8080/api/estudiantes/2026-0001
