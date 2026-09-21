@@ -10,6 +10,7 @@ Actualmente se encuentran desarrollados los endpoints correspondientes a las ent
 
 - `Estudiante`
 - `Periodo Académico`
+- `Baremo`
 
 ---
 
@@ -31,10 +32,12 @@ El código se encuentra organizado utilizando una separación por responsabilida
 ```text
 src/main/java/com/uam/admisiones
 ├── controllers
+│   ├── BaremoController.java
 │   ├── EstudianteController.java
 │   └── PeriodoAcademicoController.java
 │
 ├── dto
+│   ├── BaremoDto.java
 │   ├── EstudianteDto.java
 │   └── PeriodoAcademicoDto.java
 │
@@ -46,6 +49,7 @@ src/main/java/com/uam/admisiones
 │   └── ValidationErrorResponse.java
 │
 ├── services
+│   ├── BaremoService.java
 │   ├── EstudianteService.java
 │   └── PeriodoAcademicoService.java
 │
@@ -56,13 +60,16 @@ Además, el proyecto contiene carpetas para scripts SQL, pruebas y evidencias:
 
 ```text
 database/
+├── entidad_baremo.sql
 ├── entidad_estudiante.sql
 └── entidad_periodo_academico.sql
 
 requests/
+├── baremos.http
 └── estudiantes.http
 
 evidencias/
+├── Prueba Endpoints Entidad Baremo.pdf
 ├── Prueba Endpoints Entidad Estudiante.pdf
 └── Prueba Endpoints Entidad Periodo Academico.pdf
 ```
@@ -133,6 +140,38 @@ Adicionalmente, el servicio valida que la fecha de finalización no sea anterior
 
 ---
 
+## Baremo
+
+La entidad `Baremo` representa la tabla de conversión que relaciona una puntuación directa con un percentil, según el factor espacial y la versión del formulario.
+
+El DTO contiene un identificador y seis atributos adicionales.
+
+| Campo | Tipo | Validación principal |
+|---|---|---|
+| `id` | Integer | obligatorio y mayor que cero |
+| `versionFormularioId` | Integer | obligatorio y mayor que cero |
+| `factor` | String | obligatorio: S1A, S1B, S1, S2 o ST |
+| `puntuacionDirecta` | Integer | obligatoria y no negativa |
+| `percentil` | Integer | obligatorio, entre 1 y 99 |
+| `vigencia` | LocalDate | obligatoria |
+| `estado` | String | obligatorio: ACTIVO o INACTIVO |
+
+### Ejemplo
+
+```json
+{
+  "id": 1,
+  "versionFormularioId": 1,
+  "factor": "S1",
+  "puntuacionDirecta": 12,
+  "percentil": 45,
+  "vigencia": "2026-08-17",
+  "estado": "ACTIVO"
+}
+```
+
+---
+
 # Endpoints
 
 ## Estudiante
@@ -168,6 +207,24 @@ Ruta base:
 | POST | `/api/periodos-academicos` | Registrar período académico | `201 Created` o `400 Bad Request` |
 | PUT | `/api/periodos-academicos/{id}` | Actualizar período académico | `200 OK`, `400 Bad Request` o `404 Not Found` |
 | DELETE | `/api/periodos-academicos/{id}` | Eliminar período académico | `200 OK` o `404 Not Found` |
+
+---
+
+## Baremo
+
+Ruta base:
+
+```text
+/api/baremos
+```
+
+| Método | Ruta | Función | Respuesta |
+|---|---|---|---|
+| GET | `/api/baremos` | Listar baremos | `200 OK` |
+| GET | `/api/baremos/{id}` | Buscar baremo por identificador | `200 OK` o `404 Not Found` |
+| POST | `/api/baremos` | Registrar baremo | `201 Created` o `400 Bad Request` |
+| PUT | `/api/baremos/{id}` | Actualizar baremo | `200 OK`, `400 Bad Request` o `404 Not Found` |
+| DELETE | `/api/baremos/{id}` | Eliminar baremo | `200 OK` o `404 Not Found` |
 
 ---
 
@@ -294,6 +351,8 @@ Para `Periodo Académico` se realizaron las ocho pruebas solicitadas:
 7. `GET` utilizando un ID inexistente.
 8. `DELETE` exitoso para eliminar un período académico.
 
+Para `Baremo` se realizaron las mismas ocho pruebas, disponibles en `requests/baremos.http`.
+
 Las pruebas verifican los códigos HTTP:
 
 ```text
@@ -316,6 +375,7 @@ evidencias/
 Los documentos incluidos son:
 
 ```text
+Prueba Endpoints Entidad Baremo.pdf
 Prueba Endpoints Entidad Estudiante.pdf
 Prueba Endpoints Entidad Periodo Academico.pdf
 ```
@@ -335,6 +395,7 @@ database/
 Actualmente se incluyen:
 
 ```text
+database/entidad_baremo.sql
 database/entidad_estudiante.sql
 database/entidad_periodo_academico.sql
 ```
