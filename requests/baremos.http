@@ -1,0 +1,67 @@
+### 1. POST exitoso - 201 Created
+POST http://localhost:8080/api/baremos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "versionFormularioId": 1,
+  "factor": "S1",
+  "puntuacionDirecta": 12,
+  "percentil": 45,
+  "vigencia": "2026-08-17",
+  "estado": "ACTIVO"
+}
+
+### 2. GET todos - 200 OK
+GET http://localhost:8080/api/baremos
+
+### 3. GET por ID - 200 OK
+GET http://localhost:8080/api/baremos/1
+
+### 4. PUT exitoso - 200 OK
+PUT http://localhost:8080/api/baremos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "versionFormularioId": 1,
+  "factor": "S1",
+  "puntuacionDirecta": 14,
+  "percentil": 52,
+  "vigencia": "2026-08-17",
+  "estado": "INACTIVO"
+}
+
+### 5. POST inválido - 400 Bad Request
+POST http://localhost:8080/api/baremos
+Content-Type: application/json
+
+{
+  "id": -1,
+  "versionFormularioId": 0,
+  "factor": "XX",
+  "puntuacionDirecta": -5,
+  "percentil": 150,
+  "vigencia": null,
+  "estado": ""
+}
+
+### 6. PUT inválido - 400 Bad Request
+PUT http://localhost:8080/api/baremos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "versionFormularioId": 1,
+  "factor": "",
+  "puntuacionDirecta": null,
+  "percentil": 0,
+  "vigencia": "2026-08-17",
+  "estado": "OTRO"
+}
+
+### 7. GET ID inexistente - 404 Not Found
+GET http://localhost:8080/api/baremos/999
+
+### 8. DELETE exitoso - 200 OK
+DELETE http://localhost:8080/api/baremos/1
