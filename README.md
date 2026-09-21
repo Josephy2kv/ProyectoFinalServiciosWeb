@@ -69,6 +69,7 @@ requests/
 └── estudiantes.http
 
 evidencias/
+├── baremo/                      (capturas individuales de las 8 pruebas)
 ├── Prueba Endpoints Entidad Baremo.pdf
 ├── Prueba Endpoints Entidad Estudiante.pdf
 └── Prueba Endpoints Entidad Periodo Academico.pdf
