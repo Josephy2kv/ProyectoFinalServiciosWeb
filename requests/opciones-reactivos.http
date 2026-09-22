@@ -1,0 +1,60 @@
+### Crear opción de reactivo
+POST http://localhost:8080/api/opciones-reactivos
+Content-Type: application/json
+
+{
+  "id": 1,
+  "reactivoId": 1,
+  "literal": "A",
+  "texto": "Opción A",
+  "imagen": null,
+  "orden": 1,
+  "esCorrecta": false
+}
+
+###
+
+### Crear segunda opción
+POST http://localhost:8080/api/opciones-reactivos
+Content-Type: application/json
+
+{
+  "id": 2,
+  "reactivoId": 1,
+  "literal": "B",
+  "texto": "Opción B",
+  "imagen": null,
+  "orden": 2,
+  "esCorrecta": true
+}
+
+###
+
+### Listar todas
+GET http://localhost:8080/api/opciones-reactivos
+
+###
+
+### Buscar por ID
+GET http://localhost:8080/api/opciones-reactivos/1
+
+###
+
+### Actualizar
+PUT http://localhost:8080/api/opciones-reactivos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "reactivoId": 1,
+  "literal": "A",
+  "texto": "Opción A actualizada",
+  "imagen": "opcion-a.png",
+  "orden": 1,
+  "esCorrecta": true
+}
+
+###
+
+### Eliminar
+DELETE http://localhost:8080/api/opciones-reactivos/1
